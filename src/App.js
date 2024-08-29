@@ -60,12 +60,16 @@ function App() {
     setTodos(newTodos);
   }
 
+  //Mensaje en caso de todas las tareas están completadas
+  const allCompletedMessage = completedTodos === totalTodos && totalTodos > 0 ? "¡Felicitaciones! No hay tareas pendientes" : "";
+
   //Renderizado
   return (
     <div className='App'>
       <TodoCounter 
         completed={completedTodos}
         total={totalTodos}
+        message={allCompletedMessage}
       />
 
       <TodoSearch 
