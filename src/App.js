@@ -38,7 +38,7 @@ function App() {
 
     const todoIndex = newTodos.findIndex(
       //Encuentra el indice de la tarea
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     );
 
     newTodos[todoIndex].completed = true; //Cambia la propiedad completed a true
@@ -50,7 +50,7 @@ function App() {
   const deleteTodo = (text) => {
     const newTodos = [...todos];
 
-    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
 
     newTodos.splice(todoIndex, 1); //Elimina la tarea de la lista usando splice
 
@@ -58,13 +58,13 @@ function App() {
   };
 
   //Mensaje basado en los estados de las tareas
-  let message = '';
+  let message = "";
   if (totalTodos === 0) {
-    message = 'Crea tu primer tarea';
+    message = "Crea tu primer tarea";
   } else if (completedTodos === totalTodos) {
-    message = "¡Felicitaciones! No hay tareas pendientes"
+    message = "¡Felicitaciones! No hay tareas pendientes";
   }
-  
+
   //Renderizado
   return (
     <div className="App">
@@ -74,10 +74,7 @@ function App() {
         message={message}
       />
 
-      <TodoSearch 
-        searchValue={searchValue} 
-        setSearchValue={setSearchValue} 
-      />
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <TodoList>
         {searchedTodos.map((todo) => (

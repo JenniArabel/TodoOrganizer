@@ -1,23 +1,23 @@
 .CreateTodoButton {
-    background-color: white;
-    box-shadow: 0 5px 25px lightgray;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 50px;
-    font-weight: bold;
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    color: #F9554F;
-    display: flex;
-    justify-content: center;
-    align-items: centerd;
-    height: 60px;
-    width: 60px;
+  background-color: white;
+  box-shadow: 0 5px 25px lightgray;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 50px;
+  font-weight: bold;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  color: #f9554f;
+  display: flex;
+  justify-content: center;
+  align-items: centerd;
+  height: 60px;
+  width: 60px;
 
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 .CreateTodoButton:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
