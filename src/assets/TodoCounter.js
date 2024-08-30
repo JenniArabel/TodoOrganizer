@@ -1,3 +1,4 @@
+import React from "react";
 import "./TodoCounter.css";
 
 function TodoCounter({ completed, total, message }) {
