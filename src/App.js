@@ -6,16 +6,35 @@ import { TodoList } from "./assets/TodoList";
 import { TodoItem } from "./assets/TodoItem";
 import { CreateTodoButton } from "./assets/CreateTodoButton";
 
-const defaultTodos = [
-  { text: "Estudiar", completed: true },
-  { text: "Hacer investigación", completed: false },
-  { text: "Hacer TPs", completed: false },
-  { text: "Clase estados derivados", completed: true },
-];
+// const defaultTodos = [
+//   { text: "Estudiar", completed: true },
+//   { text: "Hacer investigación", completed: false },
+//   { text: "Hacer TPs", completed: false },
+//   { text: "Clase estados derivados", completed: true },
+// ];
+
+// localStorage.setItem("TODOS", JSON.stringify(defaultTodos));
+// localStorage.removeItem('TODOS');
 
 function App() {
+  //Local Storage: persistencia en el navegador
+  const localStorageTodos = localStorage.getItem("TODOS");
+  let parsedTodos;
+
+  if (!localStorageTodos) {
+    /* En caso de que sea la 1ra vez que un usuario entra y no hay nada en localStorage */
+    localStorage.setItem(
+      "TODOS",
+      JSON.stringify([])
+    ); /* Hay que stringify xq debemos pasar de objetos a string xq localStorage no soporta objetos complejos*/
+    parsedTodos = [];
+  } else {
+    /* CASO CONTRARIO, si hay algo en localStorageTodos */
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
   //Estados del componente
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const [todos, setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState("");
 
   //Variables o estados derivados
@@ -31,6 +50,13 @@ function App() {
     return todoText.includes(searchText);
   });
 
+  //Fx que actualice al Estado y al Local Storage al mismo tiempo (ACTUALIZAR ESTADO CON PERSISTENCIA)
+  const saveTodos = (newTodos) => {
+    localStorage.setItem("TODOS", JSON.stringify(newTodos));
+
+    setTodos(newTodos);
+  };
+
   //Fx para completar una tarea
   const completeTodo = (text) => {
     //Recibe un texto
@@ -43,7 +69,7 @@ function App() {
 
     newTodos[todoIndex].completed = true; //Cambia la propiedad completed a true
 
-    setTodos(newTodos); //Actualiza el estado de todos con la lista modificada
+    saveTodos(newTodos); //Actualiza el estado de todos con la lista modificada
   };
 
   //Fx para eliminar una tarea
@@ -54,7 +80,7 @@ function App() {
 
     newTodos.splice(todoIndex, 1); //Elimina la tarea de la lista usando splice
 
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   //Mensaje basado en los estados de las tareas
